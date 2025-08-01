@@ -4,14 +4,14 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Summator {
-    private Integer sum = 0;
-    private Integer prevValue = 0;
-    private Integer prevPrevValue = 0;
-    private Integer sumLastThreeValues = 0;
-    private Integer someValue = 0;
+public final class Summator {
+    int sum = 0;
+    int prevValue = 0;
+    int prevPrevValue = 0;
+    int sumLastThreeValues = 0;
+    int someValue = 0;
     // !!! эта коллекция должна остаться. Заменять ее на счетчик нельзя.
-    private final List<Data> listValues = new ArrayList<>();
+    private final List<Data> listValues = new ArrayList<>(100_000);
     private final SecureRandom random = new SecureRandom();
 
     // !!! сигнатуру метода менять нельзя
@@ -20,36 +20,16 @@ public class Summator {
         if (listValues.size() % 100_000 == 0) {
             listValues.clear();
         }
-        sum += data.getValue() + random.nextInt();
+        sum += data.value + random.nextInt();
 
-        sumLastThreeValues = data.getValue() + prevValue + prevPrevValue;
+        sumLastThreeValues = data.value + prevValue + prevPrevValue;
 
         prevPrevValue = prevValue;
-        prevValue = data.getValue();
+        prevValue = data.value;
 
         for (var idx = 0; idx < 3; idx++) {
-            someValue += (sumLastThreeValues * sumLastThreeValues / (data.getValue() + 1) - sum);
+            someValue += (sumLastThreeValues * sumLastThreeValues / (data.value + 1) - sum);
             someValue = Math.abs(someValue) + listValues.size();
         }
-    }
-
-    public Integer getSum() {
-        return sum;
-    }
-
-    public Integer getPrevValue() {
-        return prevValue;
-    }
-
-    public Integer getPrevPrevValue() {
-        return prevPrevValue;
-    }
-
-    public Integer getSumLastThreeValues() {
-        return sumLastThreeValues;
-    }
-
-    public Integer getSomeValue() {
-        return someValue;
     }
 }

@@ -9,10 +9,9 @@ package calculator;
 -Xlog:gc=debug:file=./logs/gc-%p-%t.log:tags,uptime,time,level:filecount=5,filesize=10m
 */
 
+import java.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.time.LocalDateTime;
 
 public class CalcDemo {
     private static final Logger log = LoggerFactory.getLogger(CalcDemo.class);
@@ -32,11 +31,11 @@ public class CalcDemo {
         }
 
         long delta = System.currentTimeMillis() - startTime;
-        log.info("PrevValue:{}", summator.getPrevValue());
-        log.info("PrevPrevValue:{}", summator.getPrevPrevValue());
-        log.info("SumLastThreeValues:{}", summator.getSumLastThreeValues());
-        log.info("SomeValue:{}", summator.getSomeValue());
-        log.info("Sum:{}", summator.getSum());
+        log.info("PrevValue:{}", summator.prevValue);
+        log.info("PrevPrevValue:{}", summator.prevPrevValue);
+        log.info("SumLastThreeValues:{}", summator.sumLastThreeValues);
+        log.info("SomeValue:{}", summator.someValue);
+        log.info("Sum:{}", summator.sum);
         log.info("spend msec:{}, sec:{}", delta, (delta / 1000));
     }
 }

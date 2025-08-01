@@ -1,13 +1,9 @@
 package calculator;
 
-public class Data {
-    private final Integer value;
+public final class Data {
+    final int value;
 
-    public Data(Integer value) {
+    public Data(int value) {
         this.value = value;
-    }
-
-    public Integer getValue() {
-        return value;
     }
 }
