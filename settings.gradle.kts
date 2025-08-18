@@ -29,3 +29,4 @@ pluginManagement {
 include("hw01-gradle")
 include("hw04-gc")
 include("hw05-byteCodes")
+include("hw06-atm")
