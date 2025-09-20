@@ -3,7 +3,6 @@ package testFramework;
 import annotations.After;
 import annotations.Before;
 import annotations.Test;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -48,8 +47,7 @@ public class TestRunner {
         printSummary(total, passed, failed);
     }
 
-    private static List<Method> getAnnotatedMethods(
-            Class<?> clazz, Class<? extends Annotation> annotationClass) {
+    private static List<Method> getAnnotatedMethods(Class<?> clazz, Class<? extends Annotation> annotationClass) {
         List<Method> methods = new ArrayList<>();
         for (Method method : clazz.getDeclaredMethods()) {
             if (method.isAnnotationPresent(annotationClass)) {
