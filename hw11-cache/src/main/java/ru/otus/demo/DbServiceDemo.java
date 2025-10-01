@@ -35,7 +35,7 @@ public class DbServiceDemo {
         ///
         var clientTemplate = new DataTemplateHibernate<>(Client.class);
         ///
-        MyCache<String, Client> dbServiceCache = new MyCache<>(10);
+        MyCache<String, Client> dbServiceCache = new MyCache<>();
         dbServiceCache.addListener(
                 (key, value, action) -> log.info("key:{}, value:{}, action: {}", key, value, action));
         var dbServiceClient = new DbServiceClientImpl(transactionManager, clientTemplate, dbServiceCache);

@@ -11,7 +11,7 @@ public class HWCacheDemo {
     }
 
     private void demo() {
-        HwCache<String, Integer> cache = new MyCache<>(5);
+        HwCache<String, Integer> cache = new MyCache<>();
 
         // пример, когда Idea предлагает упростить код, при этом может появиться "спец"-эффект
         @SuppressWarnings("java:S1604")
