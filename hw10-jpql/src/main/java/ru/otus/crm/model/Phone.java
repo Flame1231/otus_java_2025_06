@@ -31,6 +31,7 @@ public class Phone {
     }
 
     @Override
+    @SuppressWarnings("java:S2975")
     public Phone clone() {
         return new Phone(this.id, this.number);
     }

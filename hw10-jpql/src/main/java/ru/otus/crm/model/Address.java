@@ -22,6 +22,7 @@ public class Address {
     private String street;
 
     @Override
+    @SuppressWarnings("java:S2975")
     public Address clone() {
         return new Address(this.id, this.street);
     }

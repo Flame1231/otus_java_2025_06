@@ -62,6 +62,7 @@ public class Client implements Cloneable {
     }
 
     @Override
+    @SuppressWarnings("java:S2975")
     public Client clone() {
         Address clonedAddress = this.address != null ? this.address.clone() : null;
         List<Phone> clonedPhones = new ArrayList<>();
