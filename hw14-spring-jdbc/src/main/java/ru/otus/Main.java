@@ -8,7 +8,5 @@ public class Main {
 
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
-        //       new MigrationsExecutorFlyway("jdbc:postgresql://localhost:5430/demoDB", "usr",
-        // "pwd").executeMigrations();
     }
 }
