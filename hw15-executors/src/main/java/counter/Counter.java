@@ -10,49 +10,45 @@ public class Counter {
     private int lastPrintThread = 0;
     private int lastAnswerThread = 0;
 
-    public void print() {
+    public void process(boolean isPrinter) {
         String threadName = Thread.currentThread().getName();
-        int plusNumber = 1;
+        int direction = 1;
         log.info("Поток {} начал работу", threadName);
 
         while (!Thread.currentThread().isInterrupted()) {
             synchronized (monitor) {
-                while (lastPrintThread != lastAnswerThread) {
-                    try {
-                        monitor.wait();
-                    } catch (InterruptedException e) {
-                        log.info("Поток {} был прерван во время ожидания", threadName);
-                        Thread.currentThread().interrupt();
-                        return;
+                if (isPrinter) {
+                    while (lastPrintThread != lastAnswerThread) {
+                        try {
+                            monitor.wait();
+                        } catch (InterruptedException e) {
+                            Thread.currentThread().interrupt();
+                            log.info("Поток {} был прерван во время ожидания", threadName);
+                            return;
+                        }
                     }
-                }
-                lastPrintThread += plusNumber;
-                log.info("[{}] : {}", threadName, lastPrintThread);
-                sleep();
-                if (lastPrintThread == MAX_NUMBER) {
-                    plusNumber = -1;
-                } else if (lastPrintThread == MIN_NUMBER) {
-                    plusNumber = 1;
-                }
-            }
-        }
-        log.info("Поток {} завершил работу", threadName);
-    }
 
-    public void answer() {
-        String threadName = Thread.currentThread().getName();
-        log.info("Поток {} начал работу", threadName);
-
-        while (!Thread.currentThread().isInterrupted()) {
-            synchronized (monitor) {
-                if (lastPrintThread != lastAnswerThread) {
+                    lastPrintThread += direction;
                     log.info("[{}] : {}", threadName, lastPrintThread);
-                    sleep();
-                    lastAnswerThread = lastPrintThread;
+
+                    if (lastPrintThread == MAX_NUMBER) {
+                        direction = -1;
+                    } else if (lastPrintThread == MIN_NUMBER) {
+                        direction = 1;
+                    }
+
+                } else {
+                    if (lastPrintThread != lastAnswerThread) {
+                        log.info("[{}] : {}", threadName, lastPrintThread);
+                        lastAnswerThread = lastPrintThread;
+                    }
+                    monitor.notifyAll();
                 }
-                monitor.notifyAll();
             }
+
+            sleep();
         }
+
         log.info("Поток {} завершил работу", threadName);
     }
 
