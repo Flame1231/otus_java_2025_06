@@ -16,6 +16,8 @@ include("hw12-webserver")
 include("hw13-di")
 include("hw14-spring-jdbc")
 include("hw15-executors")
+include("hw16-SensorDataProcessorBuffered")
+include("hw17-grpc")
 
 pluginManagement {
     val jgitver: String by settings
@@ -38,4 +40,3 @@ pluginManagement {
         id("com.diffplug.spotless") version spotless
     }
 }
-include("hw16-SensorDataProcessorBuffered")
