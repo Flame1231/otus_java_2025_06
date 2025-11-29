@@ -40,3 +40,9 @@ pluginManagement {
         id("com.diffplug.spotless") version spotless
     }
 }
+include("hw18-reactive")
+include("hw18-reactive")
+include("hw18-reactive:client-service")
+findProject(":hw18-reactive:client-service")?.name = "client-service"
+include("hw18-reactive:datastore-service")
+findProject(":hw18-reactive:datastore-service")?.name = "datastore-service"
